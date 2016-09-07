@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Error</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #fcfcfc;
+                color: #111;
+                margin: 0;
+                padding: 20px 2em 30px;
+                border-top: solid 20px red;
+            }
+
+            h1 {
+                font-size: 30px;
+                font-weight: normal;
+                margin: 0;
+            }
+
+            h2 {
+                font-size: 20px;
+                font-weight: normal;
+                margin: 5px 0;
+            }
+
+            pre {
+                font-family: Consolas, monaco, monospace;
+                line-height: 1.75;
+                font-size: 14px;
+                color: #333;
+                counter-reset: stack -1;
+            }
+
+            .Stack-callName {
+                font-weight: bold;
+                color: #000;
+            }
+
+            .Stack-file {
+                color: #53669e;
+                text-decoration: none;
+                padding: 2px;
+            }
+
+            .Stack-file:hover {
+                background-color: #e2f5bc;
+            }
+
+            .Stack-file-file {
+                font-weight: bold;
+                color: #0b48fe;
+            }
+
+            .Stack-Level {
+                position: relative;
+                display: inline-block;
+            }
+
+            .Stack-Level:before {
+                content: counter(stack);
+                counter-increment: stack;
+                display: block;
+                position: absolute;
+                width: 1em;
+                left: -1em;
+                top: 2px;
+                text-align: right;
+                color: #aaa;
+                font-size: 11px;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <h1>%name% (%code%)</h1>
+            <h2>%message%</h2>
+            <pre>%stack%</pre>
+        </main>
+        <script>
+            document.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el.nodeName.toLowerCase() !== 'a' && el.parentElement) {
+                    el = el.parentElement;
+                }
+
+                if (el.nodeName.toLowerCase() === 'a' && el.href.match(/^http:\/\/localhost:63342/)) {
+                    fetch(el.href);
+                    event.preventDefault();
+                }
+            });
+        </script>
+    </body>
+</html>
